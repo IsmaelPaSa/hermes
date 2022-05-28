@@ -1,0 +1,29 @@
+{
+    "app":{
+        "name":"Mr. Magico",
+        "codename":"monika.hermes",
+        "version":"0.0.1",
+        "description":"Hermes is a simple, fast, and secure communication platform for the desktop devices.",
+        "author":"Ismael P. Santana",
+        "license":"none",
+        "icon":"resources/icon.ico"
+    },
+    "providers":{
+        "socket":{
+            "sender":{
+                "host":"192.168.0.17",
+                "port":16120
+            },
+            "receiver":{
+                "port":16120
+            }
+        },
+        "notification":{
+            "type":"toast",
+            "timeout":4
+        },
+        "encryption":{
+            "key":"hxpFlL-H_4sC4FnaEkZlWsyCmlD29nPFh7PY-R6xVtc="
+        }
+    }
+}
