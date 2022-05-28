@@ -114,8 +114,8 @@ my_threads = []
 def main():
     try:
         # sleep(5)
-        my_thread_getter = threading.Thread(target=getter_thread, daemon=True)
-        my_thread_setter = threading.Thread(target=setter_thread, daemon=True)
+        my_thread_getter = threading.Thread(target=getter_thread)
+        my_thread_setter = threading.Thread(target=setter_thread)
         my_thread_getter.start()
         my_thread_setter.start()
         my_threads.append(my_thread_getter)
