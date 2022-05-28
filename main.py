@@ -41,6 +41,7 @@
 
 import json
 import os
+import keyboard
 
 config_hermes_path = os.getcwd() + "/data/config/hermes.json"
 
@@ -92,31 +93,29 @@ def getter_thread():
                     hermes_clipboard.set(my_message)
                     hermes_clipboard.set(my_message)
             my_socket.close()
-            sleep(1)
         except:
             my_socket.close()
-            sleep(1)
 
 def setter_thread():
     while True:
         try:
-            my_socket = hermes_socket.Client(our_ip, our_port)
-            print('Cliente: Enviando...')
-            my_message = hermes_encryption.encrypt(hermes_clipboard.get(), my_key)
-            my_socket.send(my_message)
-            my_socket.close()
-            sleep(1)
+            # Check ctrl + c
+            if keyboard.is_pressed('ctrl+c'):
+                my_socket = hermes_socket.Client(our_ip, our_port)
+                print('Cliente: Enviando...')
+                my_message = hermes_encryption.encrypt(hermes_clipboard.get(), my_key)
+                my_socket.send(my_message)
+                my_socket.close()
         except:
             my_socket.close()
-            sleep(1)
 
 my_threads = []
 
 def main():
     try:
         # sleep(5)
-        my_thread_getter = threading.Thread(target=getter_thread)
-        my_thread_setter = threading.Thread(target=setter_thread)
+        my_thread_getter = threading.Thread(target=getter_thread, daemon=True)
+        my_thread_setter = threading.Thread(target=setter_thread, daemon=True)
         my_thread_getter.start()
         my_thread_setter.start()
         my_threads.append(my_thread_getter)
